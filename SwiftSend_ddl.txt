@@ -1,0 +1,35 @@
+1. SYNTAX DDL (DATA DEFINITION LANGUAGE)
+
+> Menghapus tabel jika sudah ada (untuk menghindari error saat re-run)
+DROP TABLE IF EXISTS table_m3;
+
+> Membuat tabel dengan tipe data yang sesuai dan penamaan kolom yang aman (underscore)
+CREATE TABLE table_m3 (
+    ID SERIAL PRIMARY KEY,
+    Warehouse_block VARCHAR(50),
+    Mode_of_Shipment VARCHAR(50),
+    Customer_care_calls INTEGER,
+    Customer_rating INTEGER,
+    Cost_of_the_Product INTEGER,
+    Prior_purchases INTEGER,
+    Product_importance VARCHAR(50),
+    Gender VARCHAR(10),
+    Discount_offered INTEGER,
+    Weight_in_gms INTEGER,
+    Reached_on_Time_Y_N INTEGER
+);
+
+
+
+2. SYNTAX DML (DATA MANIPULATION LANGUAGE)
+
+> Perintah untuk memasukkan data dari CSV ke PostgreSQL (Dijalankan via Terminal Docker/Bash)
+> Syntax: \COPY <nama_tabel> FROM '<lokasi_file_di_docker>' DELIMITER ',' CSV HEADER;
+
+\COPY table_m3(ID, Warehouse_block, Mode_of_Shipment, Customer_care_calls, Customer_rating, Cost_of_the_Product, Prior_purchases, Product_importance, Gender, Discount_offered, Weight_in_gms, Reached_on_Time_Y_N) 
+FROM '/tmp/P2M3_Rangga_Kiat_data_raw.csv' 
+DELIMITER ',' 
+CSV HEADER;
+
+> Perintah untuk memvalidasi apakah data sudah masuk
+SELECT * FROM table_m3 LIMIT 5;
